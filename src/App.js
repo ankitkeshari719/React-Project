@@ -63,6 +63,7 @@ class App extends Component {
         <h1>Welcome to React!!</h1>
         <button style={style} onClick={this.togglePersonsHandler}>Show persons list</button>
         {
+          // Using ternary operator
           this.state.showPersons ?
             <div>
               <Person name={this.state.person[0].name} age={this.state.person[0].age} />
@@ -70,7 +71,8 @@ class App extends Component {
               <Person name={this.state.person[2].name} age={this.state.person[2].age} />
               <Student name={this.state.student[0].name} age={this.state.student[0].age} changeStudentName={this.changeStudentNamehandler}>My Hobbies: Cycling</Student>
             </div>
-            : null
+            : 
+          null
         }
       </div>
     );

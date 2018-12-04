@@ -62,10 +62,20 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person name={this.state.person[0].name} age={this.state.person[0].age} />
+          {
+            this.state.person.map((p) => {
+              return <Person name={p.name} age={p.age} />
+            })
+          }
+          {
+            this.state.student.map((s) => {
+              return <Student name={s.name} age={s.age} />
+            })
+          /* <Person name={this.state.person[0].name} age={this.state.person[0].age} />
           <Person name={this.state.person[1].name} age={this.state.person[1].age} clickMe={this.switchNameHandler.bind(this, 'Ankit Keshari!!')}> My Hobbies: Cycling</Person>
           <Person name={this.state.person[2].name} age={this.state.person[2].age} />
-          <Student name={this.state.student[0].name} age={this.state.student[0].age} changeStudentName={this.changeStudentNamehandler}>My Hobbies: Cycling</Student>
+          <Student name={this.state.student[0].name} age={this.state.student[0].age} changeStudentName={this.changeStudentNamehandler}>My Hobbies: Cycling</Student> */
+          }
         </div>
       );
     }

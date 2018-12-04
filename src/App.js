@@ -58,22 +58,23 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person name={this.state.person[0].name} age={this.state.person[0].age} />
+          <Person name={this.state.person[1].name} age={this.state.person[1].age} clickMe={this.switchNameHandler.bind(this, 'Ankit Keshari!!')}> My Hobbies: Cycling</Person>
+          <Person name={this.state.person[2].name} age={this.state.person[2].age} />
+          <Student name={this.state.student[0].name} age={this.state.student[0].age} changeStudentName={this.changeStudentNamehandler}>My Hobbies: Cycling</Student>
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>Welcome to React!!</h1>
-        <button style={style} onClick={this.togglePersonsHandler}>Show persons list</button>
-        {
-          // Using ternary operator
-          this.state.showPersons ?
-            <div>
-              <Person name={this.state.person[0].name} age={this.state.person[0].age} />
-              <Person name={this.state.person[1].name} age={this.state.person[1].age} clickMe={this.switchNameHandler.bind(this, 'Ankit Keshari!!')}> My Hobbies: Cycling</Person>
-              <Person name={this.state.person[2].name} age={this.state.person[2].age} />
-              <Student name={this.state.student[0].name} age={this.state.student[0].age} changeStudentName={this.changeStudentNamehandler}>My Hobbies: Cycling</Student>
-            </div>
-            : 
-          null
-        }
+        <button style={style} onClick={this.togglePersonsHandler}>Toggle persons list</button>
+        {persons}
       </div>
     );
     // return (React.createElement('div',{className: 'App'},React.createElement('h1',null,'Welcome to React !!')));

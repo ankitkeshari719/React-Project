@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
 import Student from './Student/Student';
-import './App.css';
+import appStyle from './App.css';
+import ErrorBoundry from './ErrorBoundry/ErrorBoundry';
 
 class App extends Component {
   state = {
@@ -36,7 +37,6 @@ class App extends Component {
     const studentIndex = this.state.student.findIndex(s => {
       return s.id === id;
     });
-    console.log("studentIndex->", studentIndex);
     const student = { ...this.state.student[studentIndex] };
     //const student = Object.assign({},this.state.student[studentIndex]);
 
@@ -67,45 +67,32 @@ class App extends Component {
   }
 
   render() {
-
-    // Inline style
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      margin: '10px',
-      cursor: 'pointer',
-    };
-
-
     // Working on dynamic styling
     //let classes = ['red','bold'].join(' ');
     const classes = [];
 
-    if(this.state.person.length <= 2){
-      classes.push('red');
+    if (this.state.person.length <= 2) {
+      classes.push(appStyle.red);
     }
 
-    if(this.state.person.length <= 1){
-      classes.push('bold');
+    if (this.state.person.length <= 1) {
+      classes.push(appStyle.bold);
     }
-
-
 
     let persons = null;
+    let btnClass = '';
     if (this.state.showPersons) {
       persons = (
         <div>
           {
             this.state.person.map((p, index) => {
-              return <Person
-                name={p.name}
-                age={p.age}
-                key={p.id}
-                clickMe={() => this.deletePersonHandler(index)}
-              />
+              return <ErrorBoundry key={p.id}>
+                  <Person
+                  name={p.name}
+                  age={p.age}
+                  clickMe={() => this.deletePersonHandler(index)}
+                />
+              </ErrorBoundry>
             })
           }
           {
@@ -117,23 +104,23 @@ class App extends Component {
                 changeName={(event) => this.changeStudentNamehandler(event, s.id)}
               />
             })
-            /* <Person name={this.state.person[0].name} age={this.state.person[0].age} />
+            /*<Person name={this.state.person[0].name} age={this.state.person[0].age} />
             <Person name={this.state.person[1].name} age={this.state.person[1].age} clickMe={this.switchNameHandler.bind(this, 'Ankit Keshari!!')}> My Hobbies: Cycling</Person>
             <Person name={this.state.person[2].name} age={this.state.person[2].age} />
             <Student name={this.state.student[0].name} age={this.state.student[0].age} changeStudentName={this.changeStudentNamehandler}>My Hobbies: Cycling</Student> */
           }
         </div>
       );
-      style.backgroundColor = 'red';
+      btnClass = appStyle.Red;
     }
 
     return (
-        <div className="App">
+      <div className={appStyle.App}>
         <h1 className={classes.join(' ')}>Welcome to React!!</h1>
-        <p className= {this.state.person.length <= 2 ? "red":"bold"  }>This is really working!!</p>
-        <button style={style} onClick={this.togglePersonsHandler}>Toggle persons list</button>
+        <p className={this.state.person.length <= 2 ? appStyle.red : appStyle.bold}>This is really working!!</p>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>Toggle persons list</button>
         {persons}
-      </div>    
+      </div>
     );
     // return (React.createElement('div',{className: 'App'},React.createElement('h1',null,'Welcome to React !!')));
   }

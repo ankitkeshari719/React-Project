@@ -5,4 +5,12 @@
     margin:auto;
     padding:10px;
     text-align: center;
-  }
+}
+.deleteButton{
+  background: 'white';
+  font:inherit;
+  border: '1px solid blue';
+  padding: '8px';
+  margin: '10px';
+  cursor: 'pointer'
+}

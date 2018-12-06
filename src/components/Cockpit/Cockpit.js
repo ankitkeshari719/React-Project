@@ -23,7 +23,7 @@ const cockpit = (props) => {
 
     return (
         <div className={cockpitClasses.Cockpit}>
-            <h1 className={classes.join(' ')}>Welcome to React!!</h1>
+            <h1 className={classes.join(' ')}>{props.title}</h1>
             <p className={props.persons.length <= 2 ? cockpitClasses.red : cockpitClasses.bold}>This is really working!!</p>
             <button className={btnClass} onClick={props.togglePersons}>Toggle persons list</button>
         </div>
